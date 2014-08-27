@@ -8,7 +8,7 @@ Session 2 - Resource dependencies
 
 Session 3 - Dynamic Puppet code
 
-Session 4 - Advacned Puppet DSL
+Session 4 - Advanced Puppet DSL
 
 Session 5 - Node classification and Data separation
 

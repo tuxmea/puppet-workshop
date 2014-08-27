@@ -1,0 +1,23 @@
+Hiera
+
+hiera is built in into Puppet 3 and available as extension for Puppet 2.7
+
+Hiera defines a data hierarchy based upon different data backends.
+
+There are two backends available by default:
+- yaml
+- json
+
+There are many other backends available from community:
+- mysql
+- http(s)
+- couchdb
+- mongodb
+- file
+
+Hiera comes with a cli tool:
+
+hiera
+
+You can put strings, bools, arrays or hashes into hiera.
+

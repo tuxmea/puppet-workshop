@@ -1,0 +1,10 @@
+Puppet rspec
+
+TDD - Test Driven Development
+
+Pupept is developed on ruby language.
+ruby offers the possibility to do TDD by using rspec.
+(similar to php and phpunit or python and nosetest)
+
+see the complete example
+

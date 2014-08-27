@@ -1,0 +1,14 @@
+Puppet future:
+
+puppet is working an new versions.
+Most functionality is already available in stable code, but needs a certain config option to be available.
+
+Attention:
+this is for testing and evaluation only.
+Code can change behavior without further notice on new releases.
+Do not use experimental future features on production unless you fully understand the underlying code base.
+
+puppet.conf
+
+future_parser = true
+

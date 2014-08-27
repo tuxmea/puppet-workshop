@@ -1,0 +1,66 @@
+The steps to data:
+
+1. Parameterized classes
+2.a. hiera automatic data lookup
+2.b. hiera explicit lookup
+
+
+Classes can make use of parameters to alter logic and use different data.
+This also reduces code.
+
+Example:
+
+you want to ensure ssh is running on all of your boxes.
+Boxes are CentOS and Debian.
+
+You need to identify differences:
+
+1. Are Package names different -> Yes
+2. Are configfiles located at the different place? -> No
+3. Is service name identical? -> Yes
+
+                Debian      CentOS
+Package name:   ssh-server  openssh-server
+Service name:   openssh     ssh
+
+But: you want one ssh module only!!!!
+
+You want to control the beahvior of your module via data:
+
+e.g.
+on Debian you want
+class { ssh:
+  pkg_name => 'ssh-server',
+  srv_name => 'openssh',
+}
+
+on CentOS you want
+class { ssh:
+  pkg_name => 'openssh-server',
+  srv_name => 'ssh',
+}
+
+Within your puppet DSL code you want to use the attributes as variables.
+
+How would this be possible?
+
+You need to change your class definition to know about attributes/variables:
+
+class ssh (
+  $pkg_name,
+  $srv_name,
+) {
+  ...
+}
+
+But: when you not provide the attributes the variables in your class definition will be empty.
+
+Puppet 3 supports automatic hiera lookups:
+
+1. declare a class without attributes:
+  A. Puppet will use hiera to identify data
+  B. When no data is found, Puppet will use class variable defaults
+2. declare a class with explicit data:
+  A. Puppet will use the provided data
+
+

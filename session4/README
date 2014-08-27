@@ -1,0 +1,51 @@
+Exported and Virtual Resources
+
+Exported Resources
+
+How to get information from one node to another (e.g. monitoring)
+
+Solution:
+
+within your node's declaration put in an exported resource.
+When master compiles the catalog it will only store the information in puppetdb.
+
+Exported resources can be any kind of resource type with double @ right in front:
+
+e.g.
+@@host {
+ ...
+}
+
+On the node who needs the information:
+Add the exported resource type collector.
+When master compiles the catalog for this node it will put all data from puppetdb into the catalog
+
+e.g.
+Host <<| |>>
+
+
+Virtual Resources:
+
+declare once, use often.
+
+You want to manage resource types based upon server functionality.
+You decide to split your user management too.
+Now you want a test system where you need all users.
+But some users are on both server types.
+
+This leads to duplicate resource.
+
+Here you can use virtual resources.
+When master compiles a catalog, it will "remeber" to realze this resource later on (when being told to do so).
+A virtual resource has a single @ right in front of the type name:
+
+e.g.
+@user { ... }
+
+At some point you need to decide which of your virtual resources you want to have (realize).
+You can use the realice function or spaceship operator:
+
+e.g.
+realize(User[...])
+User <| title == '...' |>
+

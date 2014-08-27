@@ -1,0 +1,73 @@
+Session 1
+
+Puppet Modules
+
+in puppet.conf:
+modulepath = <modulepath1>:<modulepath2>:...
+
+Modulepaths are parsed in order !!!
+
+module need strict path and filenaming for autoloading:
+
+<modulepath>/<modulename>/
+                        manifests/
+                                init.pp
+                                <othername>.pp
+                                <otherdir>/
+                                        <othername>.pp
+                        files/
+                        templates/
+                        lib/
+                            facter/
+                                <custom_fact>.rb
+                            puppet/
+                                parser/
+                                    functions/
+                                            <custom_function>.rb
+                                type/
+                                    <custom_type>.rb
+                                provider/
+                                    <custom_type>/
+                                            <custom_provider>.rb
+                                util/
+                                    <custom_ruby_code>.rb
+
+Manifests:
+
+manifests contain classes
+classes contain resources
+
+Class naming has to follow strict rules:
+
+1. init.pp has to be there. This file is automatically looked up by Puppet class autoloader.
+
+<modulename>/manifests/init.pp
+
+# Class <modulname>
+#
+# Documentation for class
+#
+class <modulename> {
+  ...
+}
+
+2. Subclasses contain the main (scope) class name and the filename (subclass name)
+
+<modulename>/manifests/other.pp
+
+# Class <modulename>::other
+#
+class <modulename>::other {
+  ...
+}
+
+3. Directory structures also need to be given in the class name
+
+<modulename>/manifests/other/other.pp
+
+# Class <modulename>::other::other
+#
+class <modulename>::other::other {
+}
+
+
